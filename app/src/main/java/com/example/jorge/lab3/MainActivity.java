@@ -38,5 +38,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(view2);
             }
         });
+
     }
 }

@@ -45,6 +45,19 @@ public class ChildActivity extends AppCompatActivity {
             AlertDialog MyDialog = DialogConf.create();
             MyDialog.show();
 
+            NotificationCompat.Builder NotifBuilder = new NotificationCompat.Builder(ChildActivity.this);
+            NotifBuilder.setSmallIcon(R.mipmap.ic_launcher);
+            NotifBuilder.setContentTitle("Important Notification");
+            NotifBuilder.setContentText("This is the detail of the notification");
+
+            Intent notificationIntent = new Intent(ChildActivity.this, ChildActivity.class);
+            notificationIntent.putExtra("myData", "This string comes from the previous activity");
+            PendingIntent contentIntent = PendingIntent.getActivity(ChildActivity.this, 0, notificationIntent, 0);
+
+            NotifBuilder.setContentIntent(contentIntent);
+
+            NotificationManager MyNotification = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+            MyNotification.notify(NOTIF_ID, NotifBuilder.build());
             //getnotification(NOTIF_ID);
         } else {
             AlertDialog.Builder DialogConf = new AlertDialog.Builder(this);
@@ -64,19 +77,4 @@ public class ChildActivity extends AppCompatActivity {
         }
     }
 
-    public void getnotification(int NOTIF_ID){
-        NotificationCompat.Builder NotifBuilder = new NotificationCompat.Builder(this);
-        NotifBuilder.setSmallIcon(R.mipmap.ic_launcher);
-        NotifBuilder.setContentTitle("Important Notification");
-        NotifBuilder.setContentText("This is the detail of the notification");
-
-        Intent notificationIntent = new Intent(this, ChildActivity.class);
-        notificationIntent.putExtra("myData", "This string comes from the previous activity");
-        PendingIntent contentIntent = PendingIntent.getActivity(context, 0, notificationIntent, 0);
-
-        NotifBuilder.setContentIntent(contentIntent);
-
-        NotificationManager MyNotification = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        MyNotification.notify(NOTIF_ID, NotifBuilder.build());
-    }
 }
